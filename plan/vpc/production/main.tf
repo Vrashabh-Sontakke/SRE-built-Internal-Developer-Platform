@@ -83,3 +83,7 @@ resource "aws_route_table_association" "b" {
   subnet_id      = aws_subnet.pubsub2.id
   route_table_id = aws_route_table.rt.id
 }
+
+output "vpc_subnet_ids" {
+  value = aws_eks_cluster.eks.vpc_config[0].subnet_ids
+}
