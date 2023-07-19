@@ -1,4 +1,4 @@
-name: 'prod-cluster-terraform-apply'
+name: 'prod-cluster-apply-terraform'
 
 on:
     workflow_dispatch:
