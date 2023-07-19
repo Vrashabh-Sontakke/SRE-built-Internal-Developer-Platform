@@ -1,4 +1,4 @@
-name: 'prod-vpc-apply-terraform'
+name: 'prod-vpc-destroy-terraform'
 
 on:
     workflow_dispatch:
@@ -50,7 +50,6 @@ jobs:
     
         - name: Terraform apply
           working-directory: plan/vpc/production/
-          run: terraform apply -auto-approve  
+          run: terraform destroy -auto-approve  
               
           
-
