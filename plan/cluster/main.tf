@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket = "myterraformbucket12"
+    bucket = "terraformaws11"
     key    = "eks-prod.tfstate"
     region = "us-east-1"
   }
@@ -9,21 +9,6 @@ terraform {
       source = "hashicorp/aws"
     }
   }
-}
-
-resource "aws_eks_cluster" "eks" {
-  name = var.EKSClusterName
-  role_arn = aws_iam_role.eks-iam-role.arn
-
-  enabled_cluster_log_types = ["api", "audit", "scheduler", "controllerManager"]
-  version = var.k8sVersion
-  vpc_config {
-    subnet_ids = data.terraform_remote_state.vpc.outputs.vpc_subnet_ids
-  }
-
-  depends_on = [
-    aws_iam_role.eks-iam-role,
-  ]
 }
 
 # IAM Role for EKS to have access to the appropriate resources
