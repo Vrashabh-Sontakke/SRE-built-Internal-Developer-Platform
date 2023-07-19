@@ -36,20 +36,20 @@ jobs:
           uses: hashicorp/setup-terraform@v1
 
         - name: Terraform Init
-          working-directory: plan/cluster/
+          working-directory: plan/vpc/production/
           run: terraform init -backend-config "bucket=myterraformbucket12" -backend-config "key=eks-prod.tfstate"
               #terraform workspace new dev || terraform workspace select dev
 
         - name: Terraform Format
-          working-directory: plan/cluster/
+          working-directory: plan/vpc/production/
           run: terraform fmt
 
         - name: Terraform Plan
-          working-directory: plan/cluster/
+          working-directory: plan/vpc/production/
           run: terraform plan -var="k8sVersion=1.27"
     
         - name: Terraform apply
-          working-directory: plan/cluster/
+          working-directory: plan/vpc/production/
           run: terraform destroy -var="k8sVersion=1.27" -auto-approve  
               
           
