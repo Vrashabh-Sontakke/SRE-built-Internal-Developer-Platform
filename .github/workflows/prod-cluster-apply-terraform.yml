@@ -40,7 +40,7 @@ jobs:
           run: terraform init -backend-config "bucket=myterraformbucket12" -backend-config "key=eks-prod.tfstate"
           
         - name: Terraform Workspace
-          working-directory: plan/vpc/production/
+          working-directory: plan/cluster/
           run: terraform workspace new prod-cluster \
                 terraform workspace select prod-cluster
 
