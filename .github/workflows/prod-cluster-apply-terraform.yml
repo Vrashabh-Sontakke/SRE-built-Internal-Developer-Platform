@@ -1,4 +1,4 @@
-name: 'EKS Deployment'
+name: 'prod-cluster-terraform-apply'
 
 on:
     workflow_dispatch:
