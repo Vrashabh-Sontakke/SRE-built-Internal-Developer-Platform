@@ -50,7 +50,7 @@ jobs:
     
         - name: Terraform apply
           working-directory: plan/vpc/production/
-          run: terraform apply -var="k8sVersion=1.27" -auto-approve  
+          run: terraform apply -auto-approve  
               
           
 
