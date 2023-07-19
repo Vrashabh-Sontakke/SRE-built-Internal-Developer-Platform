@@ -1,4 +1,4 @@
-name: 'prod-cluster-destroy-terraform'
+name: 'prod-vpc-apply-terraform'
 
 on:
     workflow_dispatch:
