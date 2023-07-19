@@ -11,6 +11,30 @@ terraform {
   }
 }
 
+data "terraform_remote_state" "vpc" {
+  backend = "s3"
+  config = {
+    bucket = "myterraformbucket12"
+    key    = "eks-prod.tfstate"  # Make sure this matches the VPC configuration state file location
+    region = "us-east-1"
+  }
+}
+
+resource "aws_eks_cluster" "eks" {
+  name = var.EKSClusterName
+  role_arn = aws_iam_role.eks-iam-role.arn
+
+  enabled_cluster_log_types = ["api", "audit", "scheduler", "controllerManager"]
+  version = var.k8sVersion
+  vpc_config {
+    subnet_ids = data.terraform_remote_state.vpc.outputs.vpc_subnet_ids
+  }
+
+  depends_on = [
+    aws_iam_role.eks-iam-role,
+  ]
+}
+
 # IAM Role for EKS to have access to the appropriate resources
 resource "aws_iam_role" "eks-iam-role" {
   name = var.eksIAMRole
