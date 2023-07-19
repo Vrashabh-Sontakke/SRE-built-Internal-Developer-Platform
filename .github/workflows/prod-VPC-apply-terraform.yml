@@ -41,8 +41,7 @@ jobs:
  
         - name: Terraform Workspace
           working-directory: plan/vpc/production/
-          run: terraform workspace new prod-vpc \
-                terraform workspace select prod-vpc
+          run: terraform workspace new prod-vpc
           
         - name: Terraform Format
           working-directory: plan/vpc/production/
