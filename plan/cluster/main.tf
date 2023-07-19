@@ -11,15 +11,6 @@ terraform {
   }
 }
 
-data "terraform_remote_state" "vpc" {
-  backend = "s3"
-  config = {
-    bucket = "myterraformbucket12"
-    key    = "eks-prod.tfstate"  # Make sure this matches the VPC configuration state file location
-    region = "us-east-1"
-  }
-}
-
 resource "aws_eks_cluster" "eks" {
   name = var.EKSClusterName
   role_arn = aws_iam_role.eks-iam-role.arn
