@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket = "myterraformbucket12"
-    key    = "eks-terraform.tfstate"
+    key    = "eks-prod.tfstate"
     region = "us-east-1"
   }
   required_providers {
