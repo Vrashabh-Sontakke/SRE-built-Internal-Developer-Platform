@@ -46,7 +46,7 @@ jobs:
 
         - name: Terraform Plan
           working-directory: plan/vpc/production/
-          run: terraform plan -var="k8sVersion=1.27"
+          run: terraform plan
     
         - name: Terraform apply
           working-directory: plan/vpc/production/
