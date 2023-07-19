@@ -38,8 +38,12 @@ jobs:
         - name: Terraform Init
           working-directory: plan/vpc/production/
           run: terraform init -backend-config "bucket=myterraformbucket12" -backend-config "key=eks-prod.tfstate"
-              #terraform workspace new dev || terraform workspace select dev
-
+ 
+        - name: Terraform Workspace
+          working-directory: plan/vpc/production/
+          run: terraform workspace new prod-vpc \
+                terraform workspace select prod-vpc
+          
         - name: Terraform Format
           working-directory: plan/vpc/production/
           run: terraform fmt
