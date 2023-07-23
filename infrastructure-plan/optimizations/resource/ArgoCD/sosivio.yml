@@ -11,9 +11,11 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://helm.sosivio.io/
-    helm:
-      releaseName: sosivio
+    repoURL: https://helm.sosivio.io
+    targetRevision: HEAD
+    path: sosivio/sosivio
+  values:
+    platform: eks
   destination:
     server: https://kubernetes.default.svc
     namespace: sosivio
