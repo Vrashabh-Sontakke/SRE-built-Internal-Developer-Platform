@@ -14,8 +14,17 @@ spec:
     repoURL: https://helm.sosivio.io
     targetRevision: HEAD
     path: sosivio/sosivio
-  values:
-    platform: eks
   destination:
     server: https://kubernetes.default.svc
     namespace: sosivio
+  syncPolicy:
+    automated: {}
+  # Define the parameters for Helm
+  # These will be passed to the `helm install` command
+  # using the `--set` flag
+  helm:
+    # Values passed here will be available to the chart as {{ .Values.platform }}
+    valueFiles: []
+    parameters:
+      - name: platform
+        value: eks
