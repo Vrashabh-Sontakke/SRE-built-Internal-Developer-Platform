@@ -56,7 +56,7 @@ jobs:
         run: helm uninstall -n sosivio sosivio
       
       - name: delete Sosivio Namespace
-        run: kubectl delete -n sosivio
+        run: kubectl delete namespace sosivio
 
       # Check Uninstallation
       - name: Check Uninstallation
