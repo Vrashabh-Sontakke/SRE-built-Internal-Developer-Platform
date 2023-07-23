@@ -63,4 +63,5 @@ jobs:
 
       # Check Uninstallation
       - name: Check Uninstallation
+        shell: bash
         run: kubectl get svc -n sosivio
