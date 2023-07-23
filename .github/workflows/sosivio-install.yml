@@ -59,7 +59,14 @@ jobs:
 
       # Wait for the Dashboard service to be available
       - name: Wait for Sosivio Dashboard service availability
+        shell: bash
         run: kubectl wait --for=condition=available --timeout=300s deployment/dashboard-lb -n sosivio
         
+      # URL
+      - name: Dashboard URL
+        shell: bash
+        run: kubectl get svc -n sosivio dashboard-lb
+      
+      # username:admin :: password:
       - name: Secrets
         run: kubectl get secrets/sosivio-admin-otp -n sosivio --template={{.data.password}} | base64 -d
