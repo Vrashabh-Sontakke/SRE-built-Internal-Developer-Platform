@@ -15,10 +15,8 @@ spec:
     targetRevision: HEAD
     path: sosivio/sosivio
     helm:
-      values: []
-      parameters:
-        - name: platform
-          value: eks
+      valueFiles:
+      - values.yml
   destination:
     server: https://kubernetes.default.svc
     namespace: sosivio
