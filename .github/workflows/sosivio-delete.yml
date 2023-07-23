@@ -49,13 +49,16 @@ jobs:
 
       # Helm install Sosivio Repo
       - name: Helm install Sosivio Repo
+        shell: bash
         run: helm repo add sosivio https://helm.sosiv.io
         
       # Helm Uninstall Sosivio
       - name: Helm Uninstall Sosivio
+        shell: bash
         run: helm uninstall -n sosivio sosivio
       
       - name: delete Sosivio Namespace
+        shell: bash
         run: kubectl delete namespace sosivio
 
       # Check Uninstallation
