@@ -57,10 +57,12 @@ jobs:
         shell: bash
         run: helm install -n sosivio sosivio sosivio/sosivio --set platform=eks --create-namespace
 
-      # Wait for the Dashboard service to be available
-      - name: Wait for Sosivio Dashboard service availability
+      # Wait for the Services & Deployments to be available
+      - name: Wait for Sosivio Services & Deployments availability
         shell: bash
-        run: kubectl wait --for=condition=available --timeout=300s service/dashboard-lb -n sosivio
+        run: |
+          kubectl wait deployment --all --for=condition=Available --timeout=600s
+          kubectl wait service --all --for=condition=Available --timeout=600s
         
       # URL
       - name: Dashboard URL
