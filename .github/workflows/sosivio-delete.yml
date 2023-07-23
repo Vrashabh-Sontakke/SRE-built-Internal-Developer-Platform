@@ -1,4 +1,4 @@
-name: 'ArgoCD Deploy Sosivio'
+name: 'Sosivio Delete'
 
 on:
   workflow_dispatch:
