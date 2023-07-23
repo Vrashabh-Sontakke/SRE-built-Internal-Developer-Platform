@@ -46,7 +46,7 @@ jobs:
 
       # Deploy app
       - name: Deploy Argo app
-        run: kubectl apply -f optimizations/resource/ArgoCD/sosivio.yml
+        run: kubectl apply -f infrastructure-plan/optimizations/resource/ArgoCD/sosivio.yml
 
       # Get Secret Key
       - name: Login Secrets
