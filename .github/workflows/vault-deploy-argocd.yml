@@ -1,4 +1,4 @@
-name: 'Deploy Sosivio With ArgoCD'
+name: 'Deploy Vault With ArgoCD'
 
 on:
   workflow_dispatch:
