@@ -55,9 +55,25 @@ jobs:
       - name: Helm install Sosivio
         run: helm install -n sosivio sosivio sosivio/sosivio --set platform=eks --create-namespace
 
-      # Get Service & Secretes
-      - name: URL
-        run: kubectl get svc -n sosivio dashboard-lb
+      # Wait for the Dashboard service to be available
+      - name: Wait for Sosivio Dashboard service availability
+        run: |
+          # Loop until the service is ready or for a maximum of 5 minutes (300 seconds)
+          timeout=300
+          start_time=$(date +%s)
+          while true; do
+            status=$(kubectl get svc -n sosivio dashboard-lb -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+            if [ -n "$status" ]; then
+              break
+            fi
+            current_time=$(date +%s)
+            elapsed_time=$((current_time - start_time))
+            if [ "$elapsed_time" -ge "$timeout" ]; then
+              echo "Service dashboard-lb did not become available within the timeout period."
+              exit 1
+            fi
+            sleep 5
+          done
         
       - name: Secrets
         run: kubectl get secrets/sosivio-admin-otp -n sosivio --template={{.data.password}} | base64 -d
