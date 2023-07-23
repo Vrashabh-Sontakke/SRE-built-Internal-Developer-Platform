@@ -68,5 +68,5 @@ jobs:
         run: kubectl get svc -n sosivio dashboard-lb
       
       # username:admin :: password:
-      - name: Secrets
+      - name: username:admin :: password:
         run: kubectl get secrets/sosivio-admin-otp -n sosivio --template={{.data.password}} | base64 -d
