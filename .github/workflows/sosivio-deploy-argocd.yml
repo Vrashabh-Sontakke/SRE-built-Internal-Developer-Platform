@@ -46,8 +46,8 @@ jobs:
 
       # Deploy app
       - name: Deploy Argo app
-        run: kubectl apply -f infrastructure-plan/ArgoCD/sosivio.yaml
+        run: kubectl apply -f optimizations/resource/ArgoCD/sosivio.yaml
 
-      # Delete app
+      # Get Secret Key
       - name: Login Secrets
         run: kubectl get secrets/sosivio-admin-otp -n sosivio --template={{.data.password}} | base64 -D
