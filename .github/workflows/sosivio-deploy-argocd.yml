@@ -50,4 +50,4 @@ jobs:
 
       # Get Secret Key
       - name: Login Secrets
-        run: kubectl get secrets/sosivio-admin-otp -n sosivio --template={{.data.password}} | base64 -D
+        run: kubectl get secrets/sosivio-admin-otp -n sosivio --template={{.data.password}} | base64 -d
