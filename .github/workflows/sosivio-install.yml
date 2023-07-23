@@ -60,9 +60,7 @@ jobs:
       # Wait for the Services & Deployments to be available
       - name: Wait for Sosivio Services & Deployments availability
         shell: bash
-        run: |
-          kubectl wait deployment --all --for=condition=Available --timeout=600s
-          kubectl wait service --all --for=condition=Available --timeout=600s
+        run: kubectl wait --for=condition=available --timeout=300s deployment/sosivio-dashboard -n sosivio
         
       # URL
       - name: Dashboard URL
