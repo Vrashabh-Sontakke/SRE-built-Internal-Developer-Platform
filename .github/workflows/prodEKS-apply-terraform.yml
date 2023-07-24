@@ -1,4 +1,4 @@
-name: 'prodEKS apply terraform'
+name: 'prodEKS Apply Terraform'
 
 on:
     workflow_dispatch:
