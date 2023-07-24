@@ -1,4 +1,4 @@
-name: 'prod VPC apply terraform'
+name: 'prod VPC Apply Terraform'
 
 on:
     workflow_dispatch:
