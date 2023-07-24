@@ -1,4 +1,4 @@
-name: 'Sosivio Delete'
+name: 'Sosivio Delete from EKS'
 
 on:
   workflow_dispatch:
