@@ -1,4 +1,4 @@
-name: 'prod-cluster-apply-terraform'
+name: 'prodEKS apply terraform'
 
 on:
     workflow_dispatch:
