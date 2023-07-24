@@ -1,4 +1,4 @@
-name: 'prod VPC destroy terraform'
+name: 'prod VPC Destroy Terraform'
 
 on:
     workflow_dispatch:
