@@ -1,4 +1,4 @@
-name: 'ArgoCD install on EKS'
+name: 'ArgoCD Install on EKS'
 
 on:
   workflow_dispatch:
