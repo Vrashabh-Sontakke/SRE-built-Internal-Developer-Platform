@@ -1,4 +1,4 @@
-name: 'Deploy Sock Shop app resource with ArgoCD'
+name: 'Sock Shop App Resource Deploy with ArgoCD'
 
 on:
   workflow_dispatch:
