@@ -1,4 +1,4 @@
-name: 'prodEKS destroy terraform'
+name: 'prodEKS Destroy Terraform'
 
 on:
     workflow_dispatch:
