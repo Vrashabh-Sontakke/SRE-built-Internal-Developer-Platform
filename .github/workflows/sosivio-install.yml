@@ -1,4 +1,4 @@
-name: 'Sosivio Install'
+name: 'Sosivio Install on EKS'
 
 on:
   workflow_dispatch:
