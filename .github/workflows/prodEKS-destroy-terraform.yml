@@ -1,4 +1,4 @@
-name: 'prod-cluster-destroy-terraform'
+name: 'prodEKS-destroy-terraform'
 
 on:
     workflow_dispatch:
