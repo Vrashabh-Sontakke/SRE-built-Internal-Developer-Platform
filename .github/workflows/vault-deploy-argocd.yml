@@ -46,4 +46,4 @@ jobs:
 
       # Deploy app
       - name: Deploy Argo app
-        run: kubectl apply -f infrastructure-plan/ArgoCD/vault/vault.yml
+        run: kubectl apply -f infrastructure-plan/ArgoCD/vault/vault+values.yml
