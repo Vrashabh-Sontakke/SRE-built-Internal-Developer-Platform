@@ -47,6 +47,6 @@ jobs:
       # Deploy app
       - name: Deploy Argo app
         run: |
-          kubectl create namespace sock-shop \
-          kubectl label namespace sock-shop istio-injection=enabled \
+          kubectl create namespace sock-shop
+          kubectl label namespace sock-shop istio-injection=enabled
           kubectl apply -f infrastructure-plan/ArgoCD/deployment.yml
