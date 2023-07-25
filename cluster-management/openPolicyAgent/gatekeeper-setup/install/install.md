@@ -1,6 +1,6 @@
 ## Installation ##
 
-Using GitHub Actions:  [gatekeeper-install-eks.yml](~/.github/workflows/gatekeeper-install-eks.yml)
+Using GitHub Actions:  [gatekeeper-install-eks.yml](../../../../.github/workflows/gatekeeper-install-eks.yml)
 
 Using Helm: 
 ```
