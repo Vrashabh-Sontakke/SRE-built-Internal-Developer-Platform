@@ -2,7 +2,7 @@
 
 Using GitHub Actions:  [gatekeeper-install-eks.yml](../../../../.github/workflows/gatekeeper-install-eks.yml)
 
-Using Helm: 
+OR/ Using Helm: 
 ```
 helm repo add gatekeeper https://open-policy-agent.github.io/gatekeeper/charts
 ```
