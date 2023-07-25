@@ -57,16 +57,14 @@ jobs:
         shell: bash
         run: helm install -n sosivio sosivio sosivio/sosivio --set platform=eks --create-namespace
 
-      ## Wait for the Services & Deployments to be available
-      #- name: Wait for Sosivio Services & Deployments availability
-      #  shell: bash
-      #  run: kubectl wait --for=condition=available --timeout=300s deployment/sosivio-dashboard -n sosivio
-        
-      ## URL
-      #- name: Dashboard URL
-      #  shell: bash
-      #  run: kubectl get svc -n sosivio dashboard-lb
+      # Verify deployment
+      - name: Verify the deployment
+        run: helm list -n sosivio
       
-      ## username:admin :: password:
-      #- name: admin Password
-      #  run: kubectl get secrets/sosivio-admin-otp -n sosivio --template={{.data.password}} | base64 -d
+      # Get Login URL
+      - name: Get Login URL
+        run: kubectl get svc -n sosivio dashboard-lb -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'
+      
+      # Get Secrets
+      - name: admin password
+        run: kubectl get secrets/sosivio-admin-otp -n sosivio --template={{.data.password}} | base64 -d
