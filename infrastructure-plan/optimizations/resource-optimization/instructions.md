@@ -14,7 +14,7 @@ Get Login Screen URL:
 ```
 kubectl get svc -n sosivio dashboard-lb -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'
 ```
-Get OTP form kubernetes secrets:
+Get OTP from kubernetes secrets:
 ```
 kubectl get secrets/sosivio-admin-otp -n sosivio --template={{.data.password}} | base64 -d
 ```
