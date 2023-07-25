@@ -61,10 +61,10 @@ jobs:
       - name: Verify the deployment
         run: helm list -n sosivio
       
-      # Get Login URL
-      - name: Get Login URL
-        run: kubectl get svc -n sosivio dashboard-lb -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'
+      ## Get Login URL
+      #- name: Get Login URL
+      #  run: kubectl get svc -n sosivio dashboard-lb -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'
       
-      # Get Secrets
-      - name: admin password
-        run: kubectl get secrets/sosivio-admin-otp -n sosivio --template={{.data.password}} | base64 -d
+      ## Get Secrets
+      #- name: admin password
+      #  run: kubectl get secrets/sosivio-admin-otp -n sosivio --template={{.data.password}} | base64 -d
