@@ -58,3 +58,11 @@ jobs:
       # Verify deployment
       - name: Verify the deployment
         run: helm list -n argocd
+      
+      # Get Login URL
+      - name: Get Login URL
+        run: kubectl get svc -n argocd argocd-server -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'
+      
+      # Get Secrets
+      - name: admin password
+        run: kubectl get secret -n argocd argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
