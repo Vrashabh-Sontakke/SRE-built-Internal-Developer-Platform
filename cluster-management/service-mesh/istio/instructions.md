@@ -74,3 +74,19 @@ kubectl label namespace sock-shop istio-injection=enabled --overwrite
 ```
 kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.18/samples/addons/kiali.yaml
 ```
+
+
+### mTLS
+
+  
+
+```
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: "default"
+  namespace: "example"  # Replace "example" with your desired namespace
+spec:
+  mutualTLS:
+    mode: STRICT
+```
