@@ -75,6 +75,7 @@ jobs:
       - name: Wait for service/dashboard
         if: env.ServiceExists == 'false'
         run: |
+          sleep 60
           kubectl wait --namespace sosivio \
             --for=condition=available \
             --timeout=5m \
