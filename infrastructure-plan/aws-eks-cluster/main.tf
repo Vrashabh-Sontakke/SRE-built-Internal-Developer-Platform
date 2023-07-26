@@ -11,7 +11,7 @@ terraform {
   }
 }
 
-# required import subnet ids form prodVPC
+# required import subnet ids form VPC
 data "terraform_remote_state" "vpc" {
   backend = "s3"
   config = {
@@ -21,14 +21,20 @@ data "terraform_remote_state" "vpc" {
   }
 }
 
+# fetch subnet ids from VPC
+locals {
+  pubsub1_id = data.terraform_remote_state.vpc.pubsub1_id
+  pubsub2_id = data.terraform_remote_state.vpc.pubsub2_id
+}
+
 variable "pubsub1" {
-  type = string
-  default = data.terraform_remote_state.vpc.pubsub1_id
+  type    = string
+  default = local.pubsub1_id
 }
 
 variable "pubsub2" {
-  type = string
-  default = data.terraform_remote_state.vpc.pubsub2_id
+  type    = string
+  default = local.pubsub2_id
 }
 
 # IAM Role for EKS to have access to the appropriate resources
