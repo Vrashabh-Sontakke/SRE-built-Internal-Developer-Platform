@@ -15,7 +15,7 @@ resource "aws_vpc" "main" {
  cidr_block = "10.0.0.0/16"
  
  tags = {
-   Name = "Prod VPC"
+   Name = "prodVPC"
  }
 }
 
@@ -82,4 +82,12 @@ resource "aws_route_table_association" "a" {
 resource "aws_route_table_association" "b" {
   subnet_id      = aws_subnet.pubsub2.id
   route_table_id = aws_route_table.rt.id
+}
+
+output "pubsub1_id" {
+  value = aws_subnet.pubsub1.id
+}
+
+output "pubsub2_id" {
+  value = aws_subnet.pubsub2.id
 }
