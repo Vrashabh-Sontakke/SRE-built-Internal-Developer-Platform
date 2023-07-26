@@ -60,26 +60,26 @@ jobs:
             --wait
 
       # Check if service/dashboard-lb is running
-      - name: Check if service/dashboard is running
+      - name: Check if service/dashboard-lb is running
         run: |
-          if kubectl get service/dashboard -n sosivio &> /dev/null; then
-            echo "Service dashboard already exists, skipping the wait."
+          if kubectl get service/dashboard-lb -n sosivio &> /dev/null; then
+            echo "Service dashboard-lb already exists, skipping the wait."
             echo "ServiceExists=true" >> $GITHUB_ENV
           else
-            echo "Service dashboard not found, proceeding with the wait."
+            echo "Service dashboard-lb not found, proceeding with the wait."
             echo "ServiceExists=false" >> $GITHUB_ENV
           fi   
 
       
       # Wait for service/dashboard-lb
-      - name: Wait for service/dashboard
+      - name: Wait for service/dashboard-lb
         if: env.ServiceExists == 'false'
         run: |
-          sleep 60
+          sleep 240
           kubectl wait --namespace sosivio \
             --for=condition=available \
             --timeout=5m \
-            service/dashboard \
+            service/dashboard-lb \
             || true
       
       # Verify deployment
@@ -89,7 +89,7 @@ jobs:
       # Get Login URL
       - name: Get Login URL
         run: |
-          kubectl get service/dashboard-lb \
+          kubectl get service/dashboard-lb-lb \
             -n sosivio \
             -o jsonpath='{.status.loadBalancer.ingress[0].hostname}' \
             || true
