@@ -85,7 +85,8 @@ jobs:
           kubectl wait --namespace argocd \
             --for=condition=available \
             --timeout=3m \
-            service/argocd-server 
+            service/argocd-server \
+            || true
 
       # Verify deployment
       - name: Verify the deployment

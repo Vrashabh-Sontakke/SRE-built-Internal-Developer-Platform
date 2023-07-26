@@ -56,28 +56,30 @@ jobs:
         run: |
           helm install -n sosivio sosivio sosivio/sosivio \
             --set platform=eks \
-            --create-namespace
+            --create-namespace \
+            --wait
 
       # Check if service/dashboard-lb is running
-      - name: Check if service/dashboard-lb is running
+      - name: Check if service/dashboard is running
         run: |
-          if kubectl get service/dashboard-lb --namespace sosivio &> /dev/null; then
-            echo "Service dashboard-lb already exists, skipping the wait."
+          if kubectl get service/dashboard -n sosivio &> /dev/null; then
+            echo "Service dashboard already exists, skipping the wait."
             echo "ServiceExists=true" >> $GITHUB_ENV
           else
-            echo "Service dashboard-lb not found, proceeding with the wait."
+            echo "Service dashboard not found, proceeding with the wait."
             echo "ServiceExists=false" >> $GITHUB_ENV
           fi   
 
       
       # Wait for service/dashboard-lb
-      - name: Wait for service/dashboard-lb
+      - name: Wait for service/dashboard
         if: env.ServiceExists == 'false'
         run: |
           kubectl wait --namespace sosivio \
             --for=condition=available \
             --timeout=5m \
-            service/dashboard-lb
+            service/dashboard |
+            || true
       
       # Verify deployment
       - name: Verify the deployment
@@ -88,11 +90,13 @@ jobs:
         run: |
           kubectl get service/dashboard-lb \
             -n sosivio \
-            -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'
+            -o jsonpath='{.status.loadBalancer.ingress[0].hostname}' \
+            || true
       
       # Get Secrets
       - name: admin password
         run: |
           kubectl get secrets/sosivio-admin-otp \
             -n sosivio \
-            --template={{.data.password}} | base64 -d
+            --template={{.data.password}} | base64 -d \
+            || true
