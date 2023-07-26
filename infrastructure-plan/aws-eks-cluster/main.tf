@@ -62,8 +62,11 @@ resource "aws_eks_cluster" "eks" {
   enabled_cluster_log_types = ["api", "audit", "scheduler", "controllerManager"]
   version = var.k8sVersion
   vpc_config {
-    # You can set these as just private subnets if the Control Plane will be private
-    subnet_ids = [var.pubsub1, var.pubsub2]
+    # Import subnet IDs from remote state outputs
+    subnet_ids = [
+      terraform_remote_state.vpc.pubsub1_id,
+      terraform_remote_state.vpc.pubsub2_id,
+    ]
   }
 
   depends_on = [
