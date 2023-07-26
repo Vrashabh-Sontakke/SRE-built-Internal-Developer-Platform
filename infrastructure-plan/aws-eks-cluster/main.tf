@@ -12,7 +12,7 @@ terraform {
 }
 
 # required import subnet ids form prodVPC
-data "terraform_remote_state" "prodVPC" {
+data "terraform_remote_state" "vpc" {
   backend = "s3"
   config = {
     bucket = "aws-terra-s3"
@@ -20,6 +20,17 @@ data "terraform_remote_state" "prodVPC" {
     region = "us-east-1"
   }
 }
+
+variable "pubsub1" {
+  type = string
+  default = data.terraform_remote_state.vpc.pubsub1_id
+}
+
+variable "pubsub2" {
+  type = string
+  default = data.terraform_remote_state.vpc.pubsub2_id
+}
+
 # IAM Role for EKS to have access to the appropriate resources
 resource "aws_iam_role" "eks-iam-role" {
   name = var.eksIAMRole

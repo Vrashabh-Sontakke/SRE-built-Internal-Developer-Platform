@@ -1,11 +1,9 @@
 variable "pubsub1" {
   type = string
-  default = data.terraform_remote_state.vpc.pubsub1_id
 }
 
 variable "pubsub2" {
   type = string
-  default = data.terraform_remote_state.vpc.pubsub2_id
 }
 
 variable "eksIAMRole" {
