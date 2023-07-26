@@ -64,8 +64,8 @@ resource "aws_eks_cluster" "eks" {
   vpc_config {
     # Import subnet IDs from remote state outputs
     subnet_ids = [
-      data.terraform_remote_state.vpc.pubsub1_id,
-      data.terraform_remote_state.vpc.pubsub2_id,
+      data.terraform_remote_state.vpc.outputs.pubsub1_id,
+      data.terraform_remote_state.vpc.outputs.pubsub2_id
     ]
   }
 
