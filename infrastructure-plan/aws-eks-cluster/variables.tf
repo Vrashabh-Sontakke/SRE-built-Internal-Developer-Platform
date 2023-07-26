@@ -1,3 +1,24 @@
+variable "pubsub1" {
+  type    = string
+}
+
+variable "pubsub2" {
+  type    = string
+}
+
+dynamic "variable_defaults" {
+  for_each = {
+    pubsub1 = local.pubsub1_id
+    pubsub2 = local.pubsub2_id
+  }
+  content {
+    set {
+      name  = var.variable_defaults.key
+      value = var.variable_defaults.value
+    }
+  }
+}
+
 variable "eksIAMRole" {
   type = string
   default = "prodEKSCluster"

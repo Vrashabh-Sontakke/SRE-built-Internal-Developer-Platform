@@ -29,12 +29,12 @@ locals {
 
 variable "pubsub1" {
   type    = string
-  default = local.pubsub1_id
+  default = null
 }
 
 variable "pubsub2" {
   type    = string
-  default = local.pubsub2_id
+  default = null
 }
 
 # IAM Role for EKS to have access to the appropriate resources
