@@ -46,4 +46,4 @@ jobs:
 
       # Deploy app
       - name: Deploy Istio Application
-        run: kubectl apply -f cluster-management/istio-service-mesh/istio.yml
+        run: kubectl apply -f cluster-management/service-mesh/istio/istio.yml

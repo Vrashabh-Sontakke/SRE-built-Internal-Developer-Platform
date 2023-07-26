@@ -41,7 +41,7 @@ helm install istiod istio/istiod \
 ## OR/ Deploy using ArgoCD / Github Actions :
 
 #### ArgoCD : [istio.yml](./istio.yml)
-#### GitHub Actions : [istio-install-argocd.yml](../../../.github/workflows/istio-install-argocd.yml)
+#### GitHub Actions : [istio-install-argocd.yml](../../../../.github/workflows/istio-install-argocd.yml)
 
 # Optional :
 
