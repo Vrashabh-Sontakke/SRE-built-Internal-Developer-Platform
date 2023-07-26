@@ -1,0 +1,8 @@
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: "default"
+  namespace: "sock-shop"  # Replace "sock-shop" with your desired namespace
+spec:
+  mutualTLS:
+    mode: STRICT

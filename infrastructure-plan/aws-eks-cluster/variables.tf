@@ -1,11 +1,11 @@
 variable "pubsub1" {
   type = string
-  default = "subnet-03b044c93503d6ade"
+  default = data.terraform_remote_state.vpc.pubsub1_id
 }
 
 variable "pubsub2" {
   type = string
-  default = "subnet-025866d9702b29499"
+  default = data.terraform_remote_state.vpc.pubsub2_id
 }
 
 variable "eksIAMRole" {
