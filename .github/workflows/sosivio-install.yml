@@ -49,17 +49,30 @@ jobs:
 
       # Helm install Sosivio Repo
       - name: Helm install Sosivio Repo
-        shell: bash
         run: helm repo add sosivio https://helm.sosiv.io
         
       # Helm install Sosivio
       - name: Helm install Sosivio
-        shell: bash
-        run: helm install -n sosivio sosivio sosivio/sosivio --set platform=eks --create-namespace --wait
+        run: |
+          helm install -n sosivio sosivio sosivio/sosivio \
+            --set platform=eks \
+            --create-namespace
 
+      # Check if service/dashboard-lb is running
+      - name: Check if service/dashboard-lb is running
+        run: |
+          if kubectl get service/dashboard-lb --namespace sosivio &> /dev/null; then
+            echo "Service dashboard-lb already exists, skipping the wait."
+            echo "ServiceExists=true" >> $GITHUB_ENV
+          else
+            echo "Service dashboard-lb not found, proceeding with the wait."
+            echo "ServiceExists=false" >> $GITHUB_ENV
+          fi   
+
+      
       # Wait for service/dashboard-lb
       - name: Wait for service/dashboard-lb
-        shell: bash
+        if: env.ServiceExists == 'false'
         run: |
           kubectl wait --namespace sosivio \
             --for=condition=available \
@@ -72,8 +85,14 @@ jobs:
       
       # Get Login URL
       - name: Get Login URL
-        run: kubectl get svc -n sosivio dashboard-lb -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'
+        run: |
+          kubectl get service/dashboard-lb \
+            -n sosivio \
+            -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'
       
       # Get Secrets
       - name: admin password
-        run: kubectl get secrets/sosivio-admin-otp -n sosivio --template={{.data.password}} | base64 -d
+        run: |
+          kubectl get secrets/sosivio-admin-otp \
+            -n sosivio \
+            --template={{.data.password}} | base64 -d
