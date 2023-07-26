@@ -53,8 +53,13 @@ jobs:
         
       - name: Helm Install GateKeeper
         shell: bash
-        run: helm install gatekeeper/gatekeeper --name-template=gatekeeper --namespace gatekeeper-system --create-namespace
-      
+        run: |
+          helm install gatekeeper/gatekeeper \
+            --name-template=gatekeeper \
+            --namespace gatekeeper-system \
+            --create-namespace \
+            --wait
+
         # Verify deployment
       - name: Verify the deployment
         run: helm list -n gatekeeper-system

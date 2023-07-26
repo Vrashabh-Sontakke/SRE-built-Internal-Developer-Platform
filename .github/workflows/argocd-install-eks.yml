@@ -65,7 +65,16 @@ jobs:
             --set server.service.type=LoadBalancer \
             --create-namespace \
             --wait
-            
+      
+      # Wait for service/dashboard-lb
+      - name: Wait for service/dashboard-lb
+        shell: bash
+        run: |
+          kubectl wait --namespace argocd \
+            --for=condition=available \
+            --timeout=5m \
+            service/argocd-server
+
       # Verify deployment
       - name: Verify the deployment
         run: helm list -n argocd
