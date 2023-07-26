@@ -21,22 +21,6 @@ data "terraform_remote_state" "vpc" {
   }
 }
 
-# fetch subnet ids from VPC
-locals {
-  pubsub1_id = data.terraform_remote_state.vpc.pubsub1_id
-  pubsub2_id = data.terraform_remote_state.vpc.pubsub2_id
-}
-
-variable "pubsub1" {
-  type    = string
-  default = null
-}
-
-variable "pubsub2" {
-  type    = string
-  default = null
-}
-
 # IAM Role for EKS to have access to the appropriate resources
 resource "aws_iam_role" "eks-iam-role" {
   name = var.eksIAMRole
