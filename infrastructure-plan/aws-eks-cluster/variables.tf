@@ -1,11 +1,3 @@
-variable "pubsub1" {
-  type = string
-}
-
-variable "pubsub2" {
-  type = string
-}
-
 variable "eksIAMRole" {
   type = string
   default = "prodEKSCluster"
