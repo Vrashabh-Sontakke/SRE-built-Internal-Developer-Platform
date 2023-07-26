@@ -58,7 +58,6 @@ jobs:
             --name-template=gatekeeper \
             --namespace gatekeeper-system \
             --create-namespace \
-            --wait
 
         # Verify deployment
       - name: Verify the deployment

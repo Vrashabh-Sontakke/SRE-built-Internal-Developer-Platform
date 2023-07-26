@@ -63,17 +63,29 @@ jobs:
             --set repoServer.autoscaling.minReplicas=2 \
             --set applicationSet.replicaCount=2 \
             --set server.service.type=LoadBalancer \
-            --create-namespace \
-            --wait
+            --create-namespace
       
-      # Wait for service/dashboard-lb
-      - name: Wait for service/dashboard-lb
+      # Check if service/argocd-server is running
+      - name: Check if service/argocd-server is running
+        shell: bash
+        run: |
+          if kubectl get service/argocd-server --namespace argocd &> /dev/null; then
+            echo "Service argocd-server already exists, skipping the wait."
+            echo "ServiceExists=true" >> $GITHUB_ENV
+          else
+            echo "Service argocd-server not found, proceeding with the wait."
+            echo "ServiceExists=false" >> $GITHUB_ENV
+          fi   
+
+      # Wait for service/argocd-server
+      - name: Wait for service/argocd-server
+        if: env.ServiceExists == 'false'
         shell: bash
         run: |
           kubectl wait --namespace argocd \
             --for=condition=available \
-            --timeout=5m \
-            service/argocd-server
+            --timeout=3m \
+            service/argocd-server 
 
       # Verify deployment
       - name: Verify the deployment
@@ -81,8 +93,16 @@ jobs:
       
       # Get Login URL
       - name: Get Login URL
-        run: kubectl get svc -n argocd argocd-server -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'
+        run: |
+          kubectl get service/argocd-server \
+            --namespace argocd \
+            -o jsonpath='{.status.loadBalancer.ingress[0].hostname}' \
+            || true
       
       # Get Secrets
       - name: admin password
-        run: kubectl get secret -n argocd argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+        run: |
+          kubectl get secret/argocd-initial-admin-secret \
+            --namespace argocd \
+            -o jsonpath="{.data.password}" | base64 -d \
+            || true
