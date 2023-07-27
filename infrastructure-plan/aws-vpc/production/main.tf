@@ -12,7 +12,7 @@ terraform {
 }
 
 locals {
-  vpc_name = trim(file("../../.env")) // relative path to the .env file
+  vpc_name = file("../../.env") // relative path to the .env file
 }
 
 resource "aws_vpc" "main" {
