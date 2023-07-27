@@ -69,6 +69,7 @@ jobs:
       - name: Check if service/argocd-server is running
         shell: bash
         run: |
+          sleep 30
           if kubectl get service/argocd-server --namespace argocd &> /dev/null; then
             echo "Service argocd-server already exists, skipping the wait."
             echo "ServiceExists=true" >> $GITHUB_ENV
