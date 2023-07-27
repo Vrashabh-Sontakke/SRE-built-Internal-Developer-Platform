@@ -2,32 +2,19 @@
 
 ## Using Helm >
 
-### Repo Add
-
-  
+### Add repo
 
 ```
-
 helm repo add karpenter https://charts.karpenter.sh/
-
 ```
 
-  
-
-### Repo Update
-
+### Update repo
 ```
-
 helm repo update
-
 ```
 
-  
-
-### Istio Install
-
+### Install
 ```
-
 CLUSTER_NAME="prodEKS"
 CLUSTER_ENDPOINT="$(aws eks describe-cluster --name ${CLUSTER_NAME} --query "cluster.endpoint" --output text)"
 
@@ -37,5 +24,4 @@ helm install --namespace karpenter --create-namespace \
   --set clusterEndpoint=${CLUSTER_ENDPOINT} \
   --set aws.defaultInstanceProfile=KarpenterNodeInstanceProfile-${CLUSTER_NAME} \
   --wait
-  
 ```
