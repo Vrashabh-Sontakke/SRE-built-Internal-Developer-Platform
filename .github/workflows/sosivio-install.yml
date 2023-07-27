@@ -62,7 +62,7 @@ jobs:
       # Check if service/dashboard-lb is running
       - name: Check if service/dashboard-lb is running
         run: |
-          sleep 240
+          sleep 180
           if kubectl get service/dashboard-lb -n sosivio &> /dev/null; then
             echo "Service dashboard-lb already exists, skipping the wait."
             echo "ServiceExists=true" >> $GITHUB_ENV
