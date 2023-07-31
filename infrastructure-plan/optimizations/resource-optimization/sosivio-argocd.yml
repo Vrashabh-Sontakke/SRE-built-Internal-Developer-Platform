@@ -12,8 +12,7 @@ spec:
   project: default
   sources:
   - repoURL: https://helm.sosiv.io
-    chart: sosivio
-    targetRevision: HEAD
+    chart: sosivio/sosivio
     helm:
       valueFiles:
       - $values/infrastructure-plan/optimizations/resource-optimization/values.yml
