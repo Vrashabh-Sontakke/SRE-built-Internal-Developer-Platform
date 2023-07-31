@@ -1,11 +1,11 @@
 variable "eksIAMRole" {
   type = string
-  default = "prodEKSCluster"
+  default = "prod-eks-cluster"
 }
 
 variable "EKSClusterName" {
   type = string
-  default = "prodEKS"
+  default = "prod-eks"
 }
 
 variable "k8sVersion" {
@@ -15,7 +15,7 @@ variable "k8sVersion" {
 
 variable "workerNodeIAM" {
   type = string
-  default = "prodWorkerNodes"
+  default = "prod-worker-nodes"
 }
 
 variable "max_size" {

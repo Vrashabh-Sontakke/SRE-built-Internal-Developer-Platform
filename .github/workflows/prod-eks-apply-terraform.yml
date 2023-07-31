@@ -1,4 +1,4 @@
-name: 'prodVPC Apply Terraform'
+name: 'prod-eks Apply Terraform'
 
 on:
     workflow_dispatch:
@@ -36,24 +36,24 @@ jobs:
           uses: hashicorp/setup-terraform@v1
 
         - name: Terraform Init
-          working-directory: infrastructure-plan/aws-vpc/production/
-          run: terraform init -backend-config "bucket=aws-terra-s3" -backend-config "key=aws-terraform-vpc.tfstate"
- 
+          working-directory: infrastructure-plan/aws-eks-cluster/
+          run: terraform init -backend-config "bucket=aws-terra-s3" -backend-config "key=eks-prod.tfstate"
+          
         # - name: Terraform Workspace
-        #   working-directory: plan/vpc/production/
-        #   run: terraform workspace new prod-vpc || terraform workspace select prod-vpc
+        #   working-directory: plan/cluster/
+        #   run: terraform workspace new prod-cluster || terraform workspace select prod-cluster
           
         - name: Terraform Format
-          working-directory: infrastructure-plan/aws-vpc/production/
+          working-directory: infrastructure-plan/aws-eks-cluster/
           run: terraform fmt
 
         - name: Terraform Plan
-          working-directory: infrastructure-plan/aws-vpc/production/
-          run: terraform plan
+          working-directory: infrastructure-plan/aws-eks-cluster/
+          run: terraform plan -var="k8sVersion=1.27"
     
-        - name: Terraform apply
-          working-directory: infrastructure-plan/aws-vpc/production/
-          run: terraform apply -auto-approve  
+        - name: Terraform Apply
+          working-directory: infrastructure-plan/aws-eks-cluster/
+          run: terraform apply -var="k8sVersion=1.27" -auto-approve  
               
           
 
