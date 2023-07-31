@@ -17,7 +17,7 @@ spec:
     helm:
       valueFiles:
       - $values/infrastructure-plan/ArgoCD/vault/values.yaml
-  - repoURL: 'https://github.com/Vrashabh-Sontakke/Real-World_K8s.git'
+  - repoURL: 'https://github.com/Vrashabh-Sontakke/SRE-built-Internal-Developer-Platform'
     targetRevision: HEAD
     ref: values
   destination:

@@ -1,11 +1,11 @@
-name: 'Sosivio Install on EKS'
+name: 'Sosivio Install ArgoCD'
 
 on:
   workflow_dispatch:
       
 env:
   EKS_REGION: "us-east-1"
-  EKS_CLUSTER: "prodEKS"
+  EKS_CLUSTER: "prod-eks"
 
 jobs:
   deploy:
@@ -22,9 +22,6 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-          
-      - uses: azure/setup-helm@v3
-        id: install
         
       - name: Install kubectl
         run: |
@@ -47,17 +44,10 @@ jobs:
       - name: Connect to EKS cluster 
         run: aws eks --region $EKS_REGION update-kubeconfig --name $EKS_CLUSTER
 
-      # Helm install Sosivio Repo
-      - name: Helm install Sosivio Repo
-        run: helm repo add sosivio https://helm.sosiv.io
-        
-      # Helm install Sosivio
-      - name: Helm install Sosivio
-        run: |
-          helm install -n sosivio sosivio sosivio/sosivio \
-            --set platform=eks \
-            --create-namespace \
-            --wait
+      # Deploy app
+      - name: Deploy Argo app
+        run: kubectl apply -f infrastructure-plan/optimizations/resource-optimization/sosivio-argocd.yml
+
 
       # Check if service/dashboard-lb is running
       - name: Check if service/dashboard-lb is running
