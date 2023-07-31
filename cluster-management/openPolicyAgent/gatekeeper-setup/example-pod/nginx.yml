@@ -1,4 +1,3 @@
-## this config will work because it doesn't have the latest tag
 apiVersion: apps/v1
 kind: Deployment
 metadata:
