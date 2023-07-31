@@ -74,7 +74,7 @@ The SRE-Built Internal Developer Platform leverages the following technologies a
 ## 2. Infrastructure Plan <a name="infrastructure-plan"></a>
 
 ### 2.1 AWS and Terraform <a name="aws-and-terraform"></a>
-The infrastructure plan involves setting up the required AWS resources using Terraform. It includes provisioning virtual private clouds (VPCs), EC2 instances, load balancers, security groups, and other essential infrastructure components.
+The infrastructure plan involves setting up the required AWS resources using Terraform. It includes provisioning virtual private clouds (VPCs), Private and Public Subnets, Internet Gateways, Route Tables, and other essential infrastructure components.
 
 ### 2.2 Kubernetes (EKS) <a name="kubernetes-eks"></a>
 Kubernetes is deployed on the AWS cloud using Elastic Kubernetes Service (EKS) to provide a scalable and managed Kubernetes environment for running containerized applications.
@@ -109,7 +109,7 @@ The platform ensures that Kubernetes clusters are kept up to date by performing 
 OPA is employed to enforce policies on Kubernetes resources, ensuring compliance and security standards are met across the platform.
 
 ### 3.6 Istio Service Mesh <a name="istio-service-mesh"></a>
-Istio is used to enhance microservices communication, improve network security, and implement traffic management strategies.
+Istio is used along with mTLS   to enhance microservices communication, improve network security, and implement traffic management strategies.
 
 ### 3.7 Karpenter Cluster Autoscaling <a name="karpenter-cluster-autoscaling"></a>
 Karpenter is used to enable automatic scaling of Kubernetes clusters based on demand, providing optimal resource utilization.
