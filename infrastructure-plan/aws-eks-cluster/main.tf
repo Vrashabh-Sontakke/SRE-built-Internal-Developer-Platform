@@ -61,11 +61,15 @@ resource "aws_eks_cluster" "eks" {
 
   enabled_cluster_log_types = ["api", "audit", "scheduler", "controllerManager"]
   version = var.k8sVersion
+  
   vpc_config {
     # Import subnet IDs from remote state outputs
-    subnet_ids = [
+    subnet_ids = var.chooseSubnet == "public" ? [
       data.terraform_remote_state.vpc.outputs.pubsub1_id,
       data.terraform_remote_state.vpc.outputs.pubsub2_id
+    ] : [
+      data.terraform_remote_state.vpc.outputs.privsub1_id,
+      data.terraform_remote_state.vpc.outputs.privsub2_id
     ]
   }
 

@@ -1,3 +1,18 @@
+variable "chooseSubnet" {
+  type = string
+  default = "public" # "public" will use pubsub1 and pubsub2, "private" will use privsub1 and privsub2
+}
+
+variable "default_sub1_id" {
+  type = string
+  default = ""
+}
+
+variable "default_sub2_id" {
+  type = string
+  default = ""
+}
+
 variable "eksIAMRole" {
   type = string
   default = "prod-eks-cluster"
