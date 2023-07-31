@@ -1,4 +1,4 @@
-name: 'GateKeeper Install on EKS'
+name: 'sockShop HPA'
 
 on:
   workflow_dispatch:
