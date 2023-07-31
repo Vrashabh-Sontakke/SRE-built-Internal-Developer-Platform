@@ -48,7 +48,7 @@ jobs:
         run: aws eks --region $EKS_REGION update-kubeconfig --name $EKS_CLUSTER
       
       - name: Sock Shop Kustomize Production Overlay
-        run: kustomize build infrastructure-plan/kustomize/overlay/prod/kustomization.yaml | kubectl apply -f -
+        run: kustomize build infrastructure-plan/kustomize/overlay/prod | kubectl apply -f -
 
         # Verify deployment
       - name: Verify the deployment
