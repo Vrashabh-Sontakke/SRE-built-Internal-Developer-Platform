@@ -15,7 +15,7 @@ helm repo update
 
 ### Install
 ```
-CLUSTER_NAME='prodEKS'
+CLUSTER_NAME='prod-eks'
 API_KEY=''
 
 helm install datadog -n datadog \
