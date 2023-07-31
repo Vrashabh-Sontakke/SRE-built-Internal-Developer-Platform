@@ -49,4 +49,6 @@ jobs:
 
         # Verify deployment
       - name: Verify the deployment
-        run: kubectl get deployments -n sock-shop
+        run: |
+          sleep 15
+          kubectl get deployments -n sock-shop
