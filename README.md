@@ -30,7 +30,7 @@
    - 4.2 [GitHub Actions for Cluster Management](#github-actions-cluster-management)
 5. [Conclusion](#conclusion)
 
-# QuickStart >>> [IDP Manual](#idp-manual)
+# QuickStart >>> [IDP Manual](./manual.md)
 
 ## 1. Introduction <a name="introduction"></a>
 
