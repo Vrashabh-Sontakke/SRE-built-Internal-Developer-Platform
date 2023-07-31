@@ -16,10 +16,10 @@ spec:
     targetRevision: HEAD
     helm:
       valueFiles:
-      - $values/infrastructure-plan/optimizations/resource-optimization/sosivio.yml
+      - $values/infrastructure-plan/optimizations/resource-optimization/sosivio-argocd.yml
   - repoURL: 'https://github.com/Vrashabh-Sontakke/SRE-built-Internal-Developer-Platform'
-    targetRevision:
+    targetRevision: HEAD
     ref: values
   destination:
-    server: https://kubernetes.default.svc
+    server: "https://kubernetes.default.svc"
     namespace: sosivio
