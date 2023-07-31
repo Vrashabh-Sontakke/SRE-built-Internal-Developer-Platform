@@ -47,12 +47,10 @@ jobs:
       - name: Connect to EKS cluster 
         run: aws eks --region $EKS_REGION update-kubeconfig --name $EKS_CLUSTER
       
-      - name: Helm Install GateKeeper Repo
-        shell: bash
+      - name: Helm Add GateKeeper Repo
         run: helm repo add gatekeeper https://open-policy-agent.github.io/gatekeeper/charts
         
       - name: Helm Install GateKeeper
-        shell: bash
         run: |
           helm install gatekeeper/gatekeeper \
             --name-template=gatekeeper \
