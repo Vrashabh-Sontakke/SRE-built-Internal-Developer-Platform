@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: sosivio
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sosivio
+  namespace: argocd
+spec:
+  project: default
+  source:
+  - repoURL: https://helm.sosiv.io
+    chart: sosivio
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+      - $values/infrastructure-plan/optimizations/resource-optimization/sosivio.yml
+  - repoURL: 'https://github.com/Vrashabh-Sontakke/SRE-built-Internal-Developer-Platform'
+    targetRevision:
+    ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: sosivio

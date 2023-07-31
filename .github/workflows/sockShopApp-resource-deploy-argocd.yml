@@ -49,4 +49,4 @@ jobs:
         run: |
           kubectl create namespace sock-shop
           kubectl label namespace sock-shop istio-injection=enabled
-          kubectl apply -f infrastructure-plan/ArgoCD/sockShopApp.yml --wait
+          kubectl apply -f infrastructure-plan/sockShopApp/sockShopApp-argocd.yml --wait
