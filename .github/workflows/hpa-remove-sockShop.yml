@@ -1,4 +1,4 @@
-name: 'sockShop HPA'
+name: 'HPA Remove SockShop'
 
 on:
   workflow_dispatch:
@@ -45,7 +45,7 @@ jobs:
         run: aws eks --region $EKS_REGION update-kubeconfig --name $EKS_CLUSTER
       
       - name: Horizontal Pod Autoscaling
-        run: kubectl apply -f cluster-management/app-autoscaling/scale-horizontal.yml
+        run: kubectl delete -f cluster-management/app-autoscaling/scale-horizontal.yml
 
         # Verify deployment
       - name: Verify the deployment
