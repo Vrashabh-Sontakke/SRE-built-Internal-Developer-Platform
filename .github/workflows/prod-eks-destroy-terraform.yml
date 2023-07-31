@@ -1,4 +1,4 @@
-name: 'prodEKS Apply Terraform'
+name: 'prod-eks Destroy Terraform'
 
 on:
     workflow_dispatch:
@@ -38,11 +38,11 @@ jobs:
         - name: Terraform Init
           working-directory: infrastructure-plan/aws-eks-cluster/
           run: terraform init -backend-config "bucket=aws-terra-s3" -backend-config "key=eks-prod.tfstate"
-          
+  
         # - name: Terraform Workspace
         #   working-directory: plan/cluster/
         #   run: terraform workspace new prod-cluster || terraform workspace select prod-cluster
-          
+
         - name: Terraform Format
           working-directory: infrastructure-plan/aws-eks-cluster/
           run: terraform fmt
@@ -51,9 +51,9 @@ jobs:
           working-directory: infrastructure-plan/aws-eks-cluster/
           run: terraform plan -var="k8sVersion=1.27"
     
-        - name: Terraform Apply
+        - name: Terraform destroy
           working-directory: infrastructure-plan/aws-eks-cluster/
-          run: terraform apply -var="k8sVersion=1.27" -auto-approve  
+          run: terraform destroy -var="k8sVersion=1.27" -auto-approve  
               
           
 

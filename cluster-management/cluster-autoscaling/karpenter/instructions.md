@@ -15,7 +15,7 @@ helm repo update
 
 ### Install
 ```
-CLUSTER_NAME="prodEKS"
+CLUSTER_NAME="prod-eks"
 CLUSTER_ENDPOINT="$(aws eks describe-cluster --name ${CLUSTER_NAME} --query "cluster.endpoint" --output text)"
 
 helm install --namespace karpenter --create-namespace \
