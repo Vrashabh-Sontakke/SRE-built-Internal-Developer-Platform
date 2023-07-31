@@ -12,6 +12,7 @@
    - 2.3 [Kustomize](#kustomize)
    - 2.4 [Cost & Resource Optimization](#cost-resource-optimization)
    - 2.5 [Vault (HA)](#vault-ha)
+   - 2.6 [ArgoCD](#argocd)
 3. [Cluster Management](#cluster-management)
    - 3.1 [ArgoCD](#argocd)
    - 3.2 [Helm](#helm)
