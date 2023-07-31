@@ -9,12 +9,12 @@
 2. [Infrastructure Plan](#infrastructure-plan)
    - 2.1 [AWS and Terraform](#aws-and-terraform)
    - 2.2 [Kubernetes (EKS)](#kubernetes-eks)
-   - 2.3 [ArgoCD](#argocd)
+   - 2.3 [ArgoCD](#argocd-1)
    - 2.4 [Kustomize](#kustomize)
    - 2.5 [Cost & Resource Optimization](#cost-resource-optimization)
    - 2.6 [Vault (HA)](#vault-ha)
 3. [Cluster Management](#cluster-management)
-   - 3.1 [ArgoCD](#argocd)
+   - 3.1 [ArgoCD](#argocd-2)
    - 3.2 [Helm](#helm)
    - 3.3 [GitHub Actions](#github-actions)
    - 3.4 [Kubernetes Upgrades](#kubernetes-upgrades)
@@ -79,7 +79,7 @@ The infrastructure plan involves setting up the required AWS resources using Ter
 ### 2.2 Kubernetes (EKS) <a name="kubernetes-eks"></a>
 Kubernetes is deployed on the AWS cloud using Elastic Kubernetes Service (EKS) to provide a scalable and managed Kubernetes environment for running containerized applications.
 
-### 2.3 ArgoCD <a name="argocd"></a>
+### 2.3 ArgoCD <a name="argocd-1"></a>
 ArgoCD is the core tool for GitOps-based continuous deployment. It helps to manage applications and configuration changes in the Kubernetes clusters by leveraging Git repositories as the source of truth.
 
 ### 2.4 Kustomize <a name="kustomize"></a>
@@ -93,7 +93,7 @@ Vault is utilized in a highly available (HA) configuration to securely manage an
 
 ## 3. Cluster Management <a name="cluster-management"></a>
 
-### 3.1 ArgoCD <a name="argocd"></a>
+### 3.1 ArgoCD <a name="argocd-2"></a>
 ArgoCD is the core tool for GitOps-based continuous deployment. It helps to manage applications and configuration changes in the Kubernetes clusters by leveraging Git repositories as the source of truth.
 
 ### 3.2 Helm <a name="helm"></a>
