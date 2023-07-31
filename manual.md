@@ -18,10 +18,10 @@
 
 ###  Setup AWS Access Key in GitHub Repository
 
- 1. Create a new Access Key in your AWS account and get the 'access key id' and 'secret access key'.
+ 1. Create a new Access Key in your AWS account and get the "access key id" and "secret access key".
  2. On your project repository, go to `Settings`>`Secretes and variables`>`Actions`>`New repository secret`
- 3. Enter name `AWS_ACCESS_KEY_ID` and paste the 'access key id' in the box below.
- 4. Create another New repository secret, Enter name `AWS_SECRET_ACCESS_KEY` and paste the `secret access key` in the box below.
+ 3. Enter name `AWS_ACCESS_KEY_ID` and paste the "access key id" in the box below.
+ 4. Create another New repository secret, Enter name `AWS_SECRET_ACCESS_KEY` and paste the "secret access key" in the box below.
  5. There two more Repository Secrets you may need to setup but those are optional and we will take a look at those in a later part of the Manual.
  
 #### " There is a GitHub Actions workflow file already setup for almost all of the operational functionalities of the IDP "
