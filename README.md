@@ -1,7 +1,8 @@
+
 # SRE-Built Internal Developer Platform Documentation
 
 ## Table of Contents
-1. Introduction
+1. [Introduction](#introduction)
    - 1.1 Project Overview
    - 1.2 Project Scope
    - 1.3 Project Goals
@@ -30,7 +31,7 @@
    - 4.2 GitHub Actions for Cluster Management
 5. Conclusion
 
-## 1. Introduction
+## 1. Introduction <a name="introduction"></a>
 
 ### 1.1 Project Overview
 The SRE-Built Internal Developer Platform (IDP) is a cutting-edge infrastructure and cluster management platform designed and implemented from the knowledge and perspective of an SRE (Site Reliability Engineer) to empower developers and developer-self-service within an organization. The platform is built with a "git as the only source of truth" concept while also utilizing GitHub itself as the user interface. It enables seamless deployment and management of AWS-based infrastructure, Kubernetes clusters, and various services using a combination of AWS, Terraform, Kubernetes (EKS), Kustomize, ArgoCD, Helm, and other powerful tools and optimizations.
