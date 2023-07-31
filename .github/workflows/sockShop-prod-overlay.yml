@@ -1,4 +1,4 @@
-name: 'sockShop HPA'
+name: 'SockShop Prod Overlay'
 
 on:
   workflow_dispatch:
