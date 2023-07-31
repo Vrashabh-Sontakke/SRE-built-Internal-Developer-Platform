@@ -9,10 +9,10 @@
 2. [Infrastructure Plan](#infrastructure-plan)
    - 2.1 [AWS and Terraform](#aws-and-terraform)
    - 2.2 [Kubernetes (EKS)](#kubernetes-eks)
-   - 2.3 [Kustomize](#kustomize)
-   - 2.4 [Cost & Resource Optimization](#cost-resource-optimization)
-   - 2.5 [Vault (HA)](#vault-ha)
-   - 2.6 [ArgoCD](#argocd)
+   - 2.3 [ArgoCD](#argocd)
+   - 2.4 [Kustomize](#kustomize)
+   - 2.5 [Cost & Resource Optimization](#cost-resource-optimization)
+   - 2.6 [Vault (HA)](#vault-ha)
 3. [Cluster Management](#cluster-management)
    - 3.1 [ArgoCD](#argocd)
    - 3.2 [Helm](#helm)
@@ -79,13 +79,16 @@ The infrastructure plan involves setting up the required AWS resources using Ter
 ### 2.2 Kubernetes (EKS) <a name="kubernetes-eks"></a>
 Kubernetes is deployed on the AWS cloud using Elastic Kubernetes Service (EKS) to provide a scalable and managed Kubernetes environment for running containerized applications.
 
-### 2.3 Kustomize <a name="kustomize"></a>
+### 2.3 ArgoCD <a name="argocd"></a>
+ArgoCD is the core tool for GitOps-based continuous deployment. It helps to manage applications and configuration changes in the Kubernetes clusters by leveraging Git repositories as the source of truth.
+
+### 2.4 Kustomize <a name="kustomize"></a>
 Kustomize is used to customize Kubernetes manifests and configurations to tailor them to specific environments and requirements.
 
-### 2.4 Cost & Resource Optimization <a name="cost-resource-optimization"></a>
+### 2.5 Cost & Resource Optimization <a name="cost-resource-optimization"></a>
 To optimize costs and resources, the platform follows best practices like right-sizing instances, leveraging spot instances, and employing auto-scaling policies to adapt to varying workloads efficiently.
 
-### 2.5 Vault (HA) <a name="vault-ha"></a>
+### 2.6 Vault (HA) <a name="vault-ha"></a>
 Vault is utilized in a highly available (HA) configuration to securely manage and store sensitive information such as credentials, certificates, and tokens.
 
 ## 3. Cluster Management <a name="cluster-management"></a>
