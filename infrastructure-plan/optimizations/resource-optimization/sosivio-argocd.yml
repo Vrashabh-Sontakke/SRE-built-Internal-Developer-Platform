@@ -11,15 +11,15 @@ metadata:
 spec:
   project: default
   source:
-  - repoURL: https://helm.sosiv.io
-    chart: sosivio
-    targetRevision: HEAD
-    helm:
-      valueFiles:
-      - $values/infrastructure-plan/optimizations/resource-optimization/sosivio-argocd.yml
-  - repoURL: 'https://github.com/Vrashabh-Sontakke/SRE-built-Internal-Developer-Platform'
-    targetRevision: HEAD
-    ref: values
+    - repoURL: https://helm.sosiv.io
+      chart: sosivio
+      targetRevision: HEAD
+      helm:
+        valueFiles:
+          - $values/infrastructure-plan/optimizations/resource-optimization/sosivio-argocd.yml
+    - repoURL: 'https://github.com/Vrashabh-Sontakke/SRE-built-Internal-Developer-Platform'
+      targetRevision: HEAD
+      ref: values
   destination:
     server: "https://kubernetes.default.svc"
     namespace: sosivio
