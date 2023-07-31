@@ -44,7 +44,7 @@ jobs:
       - name: Connect to EKS cluster 
         run: aws eks --region $EKS_REGION update-kubeconfig --name $EKS_CLUSTER
       
-      - name: Horizontal Pod Autoscaling
+      - name: Install Cast.ai 
         run: |
             curl -H "Authorization: Token ${{ secrets.CASTAI_TOKEN }}" "https://api.cast.ai/v1/agent.yaml?provider=eks" | kubectl apply -f -
 
@@ -52,4 +52,4 @@ jobs:
       - name: Verify the deployment
         run: |
           sleep 15
-          kubectl get deployments -n sock-shop
+          kubectl get all -n castai-agent
