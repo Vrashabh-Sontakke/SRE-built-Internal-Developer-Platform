@@ -61,11 +61,11 @@ jobs:
         working-directory: infrastructure-plan/aws-vpc/
         run: |
           terraform plan \
-            -var "vpc_name=${{ env.TF_PREFIX }}-vpc"
+            -var "environment=${{ env.TF_PREFIX }}"
 
       - name: Terraform Apply
         working-directory: infrastructure-plan/aws-vpc/
         run: |
           terraform apply \
-            -var "vpc_name=${{ env.TF_PREFIX }}-vpc" \
+            -var "environment=${{ env.TF_PREFIX }}" \
             -auto-approve

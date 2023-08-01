@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
-    bucket = var.aws_s3_bucket  # bucket defined in GitHub Actions Workflow file and variable with vars.AWS_S3_BUCKET variable
-    key = "${var.environment}-eks.tfstate"
+    bucket = ""  # bucket defined in GitHub Actions Workflow file and variable with vars.AWS_S3_BUCKET variable
+    key    = ""  # key is defined in GitHub Actions Workflow file variable according to the var.ENVIRONMENT variable
     region = "us-east-1"
   }
   required_providers {
@@ -56,7 +56,7 @@ resource "aws_iam_role_policy_attachment" "AmazonEC2ContainerRegistryReadOnly-EK
 
 ## Create the EKS cluster
 resource "aws_eks_cluster" "eks" {
-  name = var.cluster_name
+  name = "${var.environment}-${var.cluster_name}"
   role_arn = aws_iam_role.eks-iam-role.arn
 
   enabled_cluster_log_types = ["api", "audit", "scheduler", "controllerManager"]

@@ -62,9 +62,8 @@ jobs:
         run: |
           terraform plan \
             -var="k8sVersion=1.27" \
-            -var "aws_s3_bucket=${{ vars.AWS_S3_BUCKET}}" \
-            -var "environment=${{ env.TF_PREFIX }}" \
-            -var "cluster_name=${{ env.TF_PREFIX }}-eks"
+            -var "aws_s3_bucket=${{ vars.AWS_S3_BUCKET }}" \
+            -var "environment=${{ env.TF_PREFIX }}"
 
       - name: Terraform Apply
         working-directory: infrastructure-plan/aws-eks/
@@ -73,7 +72,6 @@ jobs:
             -var "k8sVersion=1.27" \
             -var "aws_s3_bucket=${{ vars.AWS_S3_BUCKET }}" \
             -var "environment=${{ env.TF_PREFIX }}" \
-            -var "cluster_name=${{ env.TF_PREFIX }}-eks" \
             -auto-approve
           
 
