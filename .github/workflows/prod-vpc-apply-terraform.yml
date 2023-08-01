@@ -44,7 +44,7 @@ jobs:
             terraform init \
               -backend-config="bucket=${AWS_S3_BUCKET}" \
               -backend-config="key=${VPC_TFSTATE_KEY}" \
-              -backend-config="region=${BUCKET_REGION}" \
+              -backend-config="region=${BUCKET_REGION}"
  
         # - name: Terraform Workspace
         #   working-directory: plan/vpc/production/
