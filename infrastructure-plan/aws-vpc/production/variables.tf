@@ -10,11 +10,10 @@ variable "AWS_Region" {
 
 variable "AWS_S3_Bucket" {
   type = string
-  default = "aws-terra-s3"
+  default = "aws-terraform-s3"
 }
-
 
 variable "tfstate" {
   type = string
-  default = "eks-prod.tfstate"
+  default = "prod-vpc.tfstate"
 }
