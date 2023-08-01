@@ -1,8 +1,8 @@
 terraform {
   backend "s3" {
-    bucket = "aws-terra-s3"
-    key    = "aws-terraform-vpc.tfstate"
-    region = "us-east-1"
+    bucket = var.aws_s3_bucket
+    key    = var.tfstate
+    region = var.region
   }
   required_providers {
     aws = {
@@ -15,7 +15,7 @@ resource "aws_vpc" "main" {
  cidr_block = "10.0.0.0/16"
  
  tags = {
-   Name = "prod-vpc"
+   Name = var.VPC_Name
  }
 }
 

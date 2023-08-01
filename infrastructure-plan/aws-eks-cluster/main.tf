@@ -1,8 +1,8 @@
 terraform {
   backend "s3" {
-    bucket = "aws-terra-s3"
-    key    = "eks-prod.tfstate"
-    region = "us-east-1"
+    bucket = var.aws_s3_bucket
+    key    = var.tfstate
+    region = var.region
   }
   required_providers {
     aws = {
@@ -15,9 +15,9 @@ terraform {
 data "terraform_remote_state" "vpc" {
   backend = "s3"
   config = {
-    bucket = "aws-terra-s3"
-    key    = "aws-terraform-vpc.tfstate"
-    region = "us-east-1"
+    bucket = var.aws_s3_bucket
+    key    = var.tfstate
+    region = var.region
   }
 }
 
