@@ -35,9 +35,16 @@ jobs:
         - name: Setup Terraform
           uses: hashicorp/setup-terraform@v1
 
+        - name: Copy .env file to the working directory
+          run: cp .env infrastructure-plan/aws-vpc/
+
         - name: Terraform Init
           working-directory: infrastructure-plan/aws-vpc/
-          run: terraform init -backend-config=../../prod.conf
+          run: |
+            terraform init \
+              -backend-config="bucket=${AWS_S3_BUCKET}" \
+              -backend-config="key=${VPC_TFSTATE_KEY}" \
+              -backend-config="region=${BUCKET_REGION}" \
  
         # - name: Terraform Workspace
         #   working-directory: plan/vpc/production/
