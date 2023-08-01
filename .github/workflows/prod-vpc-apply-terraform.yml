@@ -42,8 +42,8 @@ jobs:
           working-directory: infrastructure-plan/aws-vpc/
           run: |
             terraform init \
-              -backend-config="bucket=${AWS_S3_BUCKET}" \
-              -backend-config="key=${VPC_TFSTATE_KEY}"
+              -backend-config="bucket=${{ vars.AWS_S3_BUCKET }}" \
+              -backend-config="region=${{ AWS_REGION }}"
  
         # - name: Terraform Workspace
         #   working-directory: plan/vpc/production/
