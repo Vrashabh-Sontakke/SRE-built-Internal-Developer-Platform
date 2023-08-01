@@ -12,8 +12,8 @@
 
 ### Project Repository
 
- - There are three branches, namely `dev`, `staging` and `prod` used for development, staging and production environments respectively.
- - Developers are recommended to work with the `dev` branch while DevOps / SRE professional are recommended to work with the `prod` branch.
+ - There are three branches, namely `development`, `staging` and `production` used for development, staging and production environments respectively.
+ - Developers are recommended to work with the `development` branch while DevOps / SRE professional are recommended to work with the `production` branch.
  - You must clone your desired branch and must use it as your `main` branch for the `.github/workflow` files to be detected by GitHub-Actions.
 
 ###  Setup AWS Access Key in GitHub Repository

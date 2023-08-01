@@ -1,6 +1,7 @@
 terraform {
   backend "s3" {
-    key = "vpc.tfstate"
+    # bucket defined in GitHub Actions Workflow file
+    key = "vpc.tfstate" # key name is variable according to the environment set
   }
 
   required_providers {
@@ -14,7 +15,7 @@ resource "aws_vpc" "main" {
  cidr_block = "10.0.0.0/16"
  
  tags = {
-   Name = var.VPC_Name
+   Name = var.vpc_name
  }
 }
 

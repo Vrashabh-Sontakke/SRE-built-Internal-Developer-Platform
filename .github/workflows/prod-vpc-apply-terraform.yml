@@ -1,65 +1,65 @@
 name: 'prod-vpc Apply Terraform'
 
 on:
-    workflow_dispatch:
+  workflow_dispatch:
 
-#on:
-    #push:
-        #branches: ["main"]
-    #pull_request:
+# on:
+#   push:
+#     branches: ["main"]
+#   pull_request:
 
 permissions:
-    contents: read
+  contents: read
 
-jobs: 
-    terraform:
-        name: 'Terraform'
-        runs-on: ubuntu-latest
-        environment: production
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    environment: ${{ vars.ENVIRONMENT }}
 
-        defaults:
-            run:
-                shell: bash
+    defaults:
+      run:
+        shell: bash
 
-        steps: 
-        - name: Checkout
-          uses: actions/checkout@v3
-          
-        - name: Configure AWS credentials
-          uses: aws-actions/configure-aws-credentials@v1
-          with:
-            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            aws-region: ${{ vars.AWS_REGION }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-        - name: Setup Terraform
-          uses: hashicorp/setup-terraform@v1
+      - name: Set TF_PREFIX based on ENVIRONMENT
+        run: |
+          if [ "${{ vars.ENVIRONMENT }}" == "production" ]; then
+            export TF_PREFIX="prod"
+          elif [ "${{ vars.ENVIRONMENT }}" == "development" ]; then
+            export TF_PREFIX="dev"
+          else
+            echo "Invalid repository value (${{ vars.ENVIRONMENT }}) from variable ENVIRONMENT. Please set the value to either 'development' or 'production'."
+            exit 1
+          fi
 
-        - name: Copy .env file to the working directory
-          run: cp .env infrastructure-plan/aws-vpc/
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ vars.AWS_REGION }}
 
-        - name: Terraform Init
-          working-directory: infrastructure-plan/aws-vpc/
-          run: |
-            terraform init \
-              -backend-config="bucket=${{ vars.AWS_S3_BUCKET }}" \
-              -backend-config="region=${{ vars.AWS_REGION }}"
- 
-        # - name: Terraform Workspace
-        #   working-directory:
-        #   run: terraform workspace new prod-vpc || terraform workspace select prod-vpc
-          
-        - name: Terraform Format
-          working-directory: infrastructure-plan/aws-vpc/
-          run: terraform fmt
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
 
-        - name: Terraform Plan
-          working-directory: infrastructure-plan/aws-vpc/
-          run: terraform plan
-    
-        - name: Terraform apply
-          working-directory: infrastructure-plan/aws-vpc/
-          run: terraform apply -auto-approve  
-              
-          
+      - name: Terraform Init
+        working-directory: infrastructure-plan/aws-vpc/
+        run: |
+          terraform init \
+            -backend-config="bucket=${{ vars.AWS_S3_BUCKET }}" \
+            -backend-config="key=${{ env.TF_PREFIX }}-vpc.tfstate"
 
+      - name: Terraform Format
+        working-directory: infrastructure-plan/aws-vpc/
+        run: terraform fmt
+
+      - name: Terraform Plan
+        working-directory: infrastructure-plan/aws-vpc/
+        run: terraform plan -var "vpc_name=${{ env.TF_PREFIX }}-vpc"
+      - name: Terraform Apply
+        working-directory: infrastructure-plan/aws-vpc/
+        run: terraform apply -auto-approve -var "vpc_name=${{ env.TF_PREFIX }}-vpc"
