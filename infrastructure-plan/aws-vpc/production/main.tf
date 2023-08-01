@@ -1,8 +1,8 @@
 terraform {
   backend "s3" {
-    bucket = var.aws_s3_bucket
+    bucket = var.AWS_S3_Bucket
     key    = var.tfstate
-    region = var.region
+    region = var.AWS_Region
   }
   required_providers {
     aws = {
