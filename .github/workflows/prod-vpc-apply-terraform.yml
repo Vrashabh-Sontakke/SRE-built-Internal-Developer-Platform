@@ -36,7 +36,7 @@ jobs:
           uses: hashicorp/setup-terraform@v1
 
         - name: Terraform Init
-          working-directory: infrastructure-plan/aws-vpc/production/
+          working-directory: infrastructure-plan/aws-vpc/
           run: terraform init -backend-config=../../prod.conf
  
         # - name: Terraform Workspace
@@ -44,15 +44,15 @@ jobs:
         #   run: terraform workspace new prod-vpc || terraform workspace select prod-vpc
           
         - name: Terraform Format
-          working-directory: infrastructure-plan/aws-vpc/production/
+          working-directory: infrastructure-plan/aws-vpc/
           run: terraform fmt
 
         - name: Terraform Plan
-          working-directory: infrastructure-plan/aws-vpc/production/
+          working-directory: infrastructure-plan/aws-vpc/
           run: terraform plan
     
         - name: Terraform apply
-          working-directory: infrastructure-plan/aws-vpc/production/
+          working-directory: infrastructure-plan/aws-vpc/
           run: terraform apply -auto-approve  
               
           
