@@ -1,7 +1,8 @@
 terraform {
   backend "s3" {
-    
+    key = "vpc.tfstate"
   }
+
   required_providers {
     aws = {
       source = "hashicorp/aws"
