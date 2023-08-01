@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
-    bucket = "${var.aws_s3_bucket}"  # bucket defined in GitHub Actions Workflow file
-    key = "${var.environment}-eks.tfstate" # key name is variable according to the environment set
+    bucket = var.aws_s3_bucket  # bucket defined in GitHub Actions Workflow file and variable with vars.AWS_S3_BUCKET variable
+    key = "${var.environment}-eks.tfstate"
     region = "us-east-1"
   }
   required_providers {
