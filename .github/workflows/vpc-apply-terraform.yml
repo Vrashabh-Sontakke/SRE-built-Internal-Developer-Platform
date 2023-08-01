@@ -1,4 +1,4 @@
-name: 'prod-vpc Apply Terraform'
+name: 'VPC Apply Terraform'
 
 on:
   workflow_dispatch:
@@ -50,8 +50,8 @@ jobs:
         working-directory: infrastructure-plan/aws-vpc/
         run: |
           terraform init \
-            -backend-config="bucket=${{ vars.AWS_S3_BUCKET }}" \
-            -backend-config="key=${{ env.TF_PREFIX }}-vpc.tfstate"
+            -backend-config "bucket=${{ vars.AWS_S3_BUCKET }}" \
+            -backend-config "key=${{ env.TF_PREFIX }}-vpc.tfstate"
 
       - name: Terraform Format
         working-directory: infrastructure-plan/aws-vpc/
@@ -59,7 +59,13 @@ jobs:
 
       - name: Terraform Plan
         working-directory: infrastructure-plan/aws-vpc/
-        run: terraform plan -var "vpc_name=${{ env.TF_PREFIX }}-vpc"
+        run: |
+          terraform plan \
+            -var "vpc_name=${{ env.TF_PREFIX }}-vpc"
+
       - name: Terraform Apply
         working-directory: infrastructure-plan/aws-vpc/
-        run: terraform apply -auto-approve -var "vpc_name=${{ env.TF_PREFIX }}-vpc"
+        run: |
+          terraform apply \
+            -var "vpc_name=${{ env.TF_PREFIX }}-vpc" \
+            -auto-approve

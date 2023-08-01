@@ -1,0 +1,71 @@
+name: 'VPC Destroy Terraform'
+
+on:
+  workflow_dispatch:
+
+# on:
+#   push:
+#     branches: ["main"]
+#   pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    environment: ${{ vars.ENVIRONMENT }}
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set TF_PREFIX based on ENVIRONMENT
+        run: |
+          if [ "${{ vars.ENVIRONMENT }}" == "production" ]; then
+            echo "TF_PREFIX=prod" >> $GITHUB_ENV
+          elif [ "${{ vars.ENVIRONMENT }}" == "development" ]; then
+            echo "TF_PREFIX=dev" >> $GITHUB_ENV
+          else
+            echo "Invalid repository value (${{ vars.ENVIRONMENT }}) from variable ENVIRONMENT. Please set the value to either 'development' or 'production'."
+            exit 1
+          fi
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Terraform Init
+        working-directory: infrastructure-plan/aws-vpc/
+        run: |
+          terraform init \
+            -backend-config "bucket=${{ vars.AWS_S3_BUCKET }}" \
+            -backend-config "key=${{ env.TF_PREFIX }}-vpc.tfstate"
+
+      - name: Terraform Format
+        working-directory: infrastructure-plan/aws-vpc/
+        run: terraform fmt
+
+      - name: Terraform Plan
+        working-directory: infrastructure-plan/aws-vpc/
+        run: |
+          terraform plan \
+            -var "vpc_name=${{ env.TF_PREFIX }}-vpc"
+
+      - name: Terraform Apply
+        working-directory: infrastructure-plan/aws-vpc/
+        run: |
+          terraform destroy \
+            -var "vpc_name=${{ env.TF_PREFIX }}-vpc" \
+            -auto-approve

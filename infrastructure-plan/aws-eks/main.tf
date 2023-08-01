@@ -1,6 +1,8 @@
 terraform {
   backend "s3" {
-    key    = "eks.tfstate"
+    # bucket defined in GitHub Actions Workflow file
+    key = "eks.tfstate" # key name is variable according to the environment set
+    region = "us-east-1"
   }
   required_providers {
     aws = {
@@ -14,8 +16,8 @@ data "terraform_remote_state" "vpc" {
   backend = "s3"
   config = {
     bucket = var.aws_s3_bucket
-    key    = var.tfstate
-    region = var.region
+    key    = "${var.environment}-vpc.tfstate"
+    region = "us-east-1"
   }
 }
 
@@ -62,7 +64,7 @@ resource "aws_eks_cluster" "eks" {
   
   vpc_config {
     # Import subnet IDs from remote state outputs
-    subnet_ids = var.chooseSubnet == "public" ? [
+    subnet_ids = var.environment == "prod" ? [
       data.terraform_remote_state.vpc.outputs.pubsub1_id,
       data.terraform_remote_state.vpc.outputs.pubsub2_id
     ] : [
@@ -124,11 +126,14 @@ resource "aws_iam_role_policy_attachment" "AmazonEBSCSIDriverPolicy" {
 
 resource "aws_eks_node_group" "worker-node-group" {
   cluster_name    = aws_eks_cluster.eks.name
-  node_group_name = "workernodes-${var.environment}"
+  node_group_name = "${var.environment}-workernodes"
   node_role_arn   = aws_iam_role.workernodes.arn
-  subnet_ids = [
+  subnet_ids = var.environment == "prod" ? [
       data.terraform_remote_state.vpc.outputs.pubsub1_id,
       data.terraform_remote_state.vpc.outputs.pubsub2_id
+    ] : [
+      data.terraform_remote_state.vpc.outputs.privsub1_id,
+      data.terraform_remote_state.vpc.outputs.privsub2_id
     ]
   instance_types = var.instanceType
 
