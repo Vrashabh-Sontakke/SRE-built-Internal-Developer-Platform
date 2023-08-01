@@ -37,7 +37,7 @@ jobs:
 
         - name: Terraform Init
           working-directory: infrastructure-plan/aws-vpc/production/
-          run: terraform init -backend-config "bucket=aws-terra-s3" -backend-config "key=aws-terraform-vpc.tfstate"
+          run: terraform init -backend-config=../../prod.conf
  
         # - name: Terraform Workspace
         #   working-directory: plan/vpc/production/

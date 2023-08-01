@@ -1,5 +1,5 @@
 # AWS Region
-AWS_Region = "us-east-1"
+AWS_Region = "ap-south-1"
 
 # AWS VPC Name
 VPC_Name = "prod-vpc"
@@ -8,4 +8,4 @@ VPC_Name = "prod-vpc"
 AWS_S3_Bucket = "aws-terraform-s3"
 
 # Terraform state file name
-tfstate = "prod-eks.tfstate"
+tfstate = "prod-vpc.tfstate"

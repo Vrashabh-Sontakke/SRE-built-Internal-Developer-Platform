@@ -5,7 +5,7 @@ variable "VPC_Name" {
 
 variable "AWS_Region" {
   type = string
-  default = "us-east-1"
+  default = "ap-south-1"
 }
 
 variable "AWS_S3_Bucket" {
