@@ -15,7 +15,7 @@ terraform {
 data "terraform_remote_state" "vpc" {
   backend = "s3"
     config = {
-      bucket = "${var.aws_s3_bucket}"
+      bucket = var.aws_s3_bucket
       key    = "${var.environment}-vpc.tfstate"
       region = "us-east-1"
     }
