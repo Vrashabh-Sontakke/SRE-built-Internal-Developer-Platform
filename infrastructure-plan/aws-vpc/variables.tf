@@ -15,5 +15,5 @@ variable "AWS_S3_Bucket" {
 
 variable "tfstate" {
   type = string
-  default = "prod-vpc.tfstate"
+  default = "vpc.tfstate"
 }

@@ -18,7 +18,7 @@ AWS_Region = "us-east-1"
 AWS_S3_Bucket = "aws-terraform-s3"
 
 # Terraform state file name
-tfstate = "prod-eks.tfstate"
+tfstate = "eks.tfstate"
 
 # Kubernetes version
 k8sVersion = "1.26"

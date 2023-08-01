@@ -37,7 +37,7 @@ variable "AWS_S3_Bucket" {
 
 variable "tfstate" {
   type = string
-  default = "prod-eks.tfstate"
+  default = "eks.tfstate"
 }
 
 variable "k8sVersion" {

@@ -8,4 +8,4 @@ VPC_Name = "prod-vpc"
 AWS_S3_Bucket = "aws-terraform-s3"
 
 # Terraform state file name
-tfstate = "prod-vpc.tfstate"
+tfstate = "vpc.tfstate"
