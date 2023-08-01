@@ -26,5 +26,5 @@
  
 #### " There is a GitHub Actions workflow file already setup for almost all of the operational functionalities of the IDP "
 
-## infrastructure-plan
+## [infrastructure-plan](./infrastructure-plan)
 ### 
