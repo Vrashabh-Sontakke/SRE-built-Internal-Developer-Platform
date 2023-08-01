@@ -14,11 +14,11 @@ terraform {
 # required import subnet ids form VPC
 data "terraform_remote_state" "vpc" {
   backend = "s3"
-  config = {
-    bucket = "${var.aws_s3_bucket}"
-    key    = "${var.environment}-vpc.tfstate"
-    region = "us-east-1"
-  }
+    config = {
+      bucket = "${var.aws_s3_bucket}"
+      key    = "${var.environment}-vpc.tfstate"
+      region = "us-east-1"
+    }
 }
 
 # IAM Role for EKS to have access to the appropriate resources
@@ -56,7 +56,7 @@ resource "aws_iam_role_policy_attachment" "AmazonEC2ContainerRegistryReadOnly-EK
 
 ## Create the EKS cluster
 resource "aws_eks_cluster" "eks" {
-  name = var.EKSClusterName
+  name = var.cluster_name
   role_arn = aws_iam_role.eks-iam-role.arn
 
   enabled_cluster_log_types = ["api", "audit", "scheduler", "controllerManager"]
