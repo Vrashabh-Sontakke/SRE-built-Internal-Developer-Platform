@@ -1,6 +1,7 @@
 variable "chooseSubnet" {
   type = string
-  default = "public" # "public" will use pubsub1 and pubsub2, "private" will use privsub1 and privsub2
+  default = "public" # "public" will use [pubsub1, pubsub2]
+                     # "private" or leaving blank will use [privsub1, privsub2]
 }
 
 variable "default_sub1_id" {
@@ -23,19 +24,20 @@ variable "EKSClusterName" {
   default = "prod-eks"
 }
 
-variable "aws_s3_bucket" {
-  type = string
-  default = "aws-terra-s3"
-}
-
-variable "region" {
+variable "AWS_Region" {
   type = string
   default = "us-east-1"
 }
 
+variable "AWS_S3_Bucket" {
+  type = string
+  default = "aws-terraform-s3"
+}
+
+
 variable "tfstate" {
   type = string
-  default = "eks-prod.tfstate"
+  default = "prod-eks.tfstate"
 }
 
 variable "k8sVersion" {
