@@ -28,9 +28,9 @@ jobs:
       - name: Set TF_PREFIX based on ENVIRONMENT
         run: |
           if [ "${{ vars.ENVIRONMENT }}" == "production" ]; then
-            export TF_PREFIX="prod"
+            echo "TF_PREFIX=prod" >> $GITHUB_ENV
           elif [ "${{ vars.ENVIRONMENT }}" == "development" ]; then
-            export TF_PREFIX="dev"
+            echo "TF_PREFIX=dev" >> $GITHUB_ENV
           else
             echo "Invalid repository value (${{ vars.ENVIRONMENT }}) from variable ENVIRONMENT. Please set the value to either 'development' or 'production'."
             exit 1
@@ -41,7 +41,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ vars.AWS_REGION }}
+          aws-region: us-east-1
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
