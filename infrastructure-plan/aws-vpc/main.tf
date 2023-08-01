@@ -2,6 +2,7 @@ terraform {
   backend "s3" {
     # bucket defined in GitHub Actions Workflow file
     key = "vpc.tfstate" # key name is variable according to the environment set
+    region = "us-east-1"
   }
 
   required_providers {
