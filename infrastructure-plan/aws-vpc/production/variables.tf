@@ -3,12 +3,12 @@ variable "VPC_Name" {
   default = "prod-vpc"
 }
 
-variable "region" {
+variable "AWS_Region" {
   type = string
   default = "us-east-1"
 }
 
-variable "aws_s3_bucket" {
+variable "AWS_S3_Bucket" {
   type = string
   default = "aws-terra-s3"
 }
