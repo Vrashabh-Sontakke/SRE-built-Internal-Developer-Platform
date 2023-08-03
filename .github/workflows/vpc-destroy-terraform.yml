@@ -63,7 +63,7 @@ jobs:
           terraform plan \
             -var "environment=${{ env.TF_PREFIX }}"
 
-      - name: Terraform Apply
+      - name: Terraform Destroy VPC
         working-directory: infrastructure-plan/aws-vpc/
         run: |
           terraform destroy \
