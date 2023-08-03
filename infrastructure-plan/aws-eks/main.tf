@@ -128,13 +128,15 @@ resource "aws_eks_node_group" "worker-node-group" {
   cluster_name    = aws_eks_cluster.eks.name
   node_group_name = "${var.environment}-workernodes"
   node_role_arn   = aws_iam_role.workernodes.arn
+  
   subnet_ids = var.environment == "prod" ? [
       data.terraform_remote_state.vpc.outputs.pubsub1_id,
       data.terraform_remote_state.vpc.outputs.pubsub2_id
-    ] : [
+    ] : var.environment == "dev" ? [
       data.terraform_remote_state.vpc.outputs.privsub1_id,
       data.terraform_remote_state.vpc.outputs.privsub2_id
-    ]
+    ] : []
+    
   instance_types = var.instanceType
 
   scaling_config {
