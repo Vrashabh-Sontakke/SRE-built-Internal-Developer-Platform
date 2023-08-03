@@ -67,10 +67,10 @@ resource "aws_eks_cluster" "eks" {
     subnet_ids = var.environment == "prod" ? [
       data.terraform_remote_state.vpc.outputs.pubsub1_id,
       data.terraform_remote_state.vpc.outputs.pubsub2_id
-    ] : [
+    ] : var.environment == "dev" ? [
       data.terraform_remote_state.vpc.outputs.privsub1_id,
       data.terraform_remote_state.vpc.outputs.privsub2_id
-    ]
+    ] : []
   }
 
   depends_on = [
