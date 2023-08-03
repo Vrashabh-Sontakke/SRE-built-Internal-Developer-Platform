@@ -65,7 +65,7 @@ jobs:
             -var "aws_s3_bucket=${{ vars.AWS_S3_BUCKET }}" \
             -var "environment=${{ env.TF_PREFIX }}"
 
-      - name: Terraform Apply
+      - name: Terraform Destroy EKS
         working-directory: infrastructure-plan/aws-eks/
         run: |
           terraform destroy \
