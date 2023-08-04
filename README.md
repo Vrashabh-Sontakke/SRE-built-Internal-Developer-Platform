@@ -1,10 +1,7 @@
 # SRE-Built Internal Developer Platform Documentation
 
 ## Table of Contents
-- [SRE-Built Internal Developer Platform Documentation](#sre-built-internal-developer-platform-documentation)
-  - [Table of Contents](#table-of-contents)
-- [QuickStart \>\>\> IDP Manual](#quickstart--idp-manual)
-  - [1. Introduction ](#1-introduction-)
+- [1. Introduction ](#1-introduction-)
     - [1.1 Project Overview ](#11-project-overview-)
     - [1.2 Project Scope ](#12-project-scope-)
     - [1.3 Project Goals ](#13-project-goals-)
@@ -34,7 +31,7 @@
     - [4.2 GitHub Actions for Cluster Management ](#42-github-actions-for-cluster-management-)
   - [5. Conclusion ](#5-conclusion-)
 
-# QuickStart >>> [IDP Manual](./documentation/manual.md)
+# QuickStart >>> [IDP Manual](documentation/manual.md)
 
 ## 1. Introduction <a name="introduction"></a>
 
