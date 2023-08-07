@@ -1,4 +1,4 @@
-name: 'Sosivio Install on EKS'
+name: 'RBAC for mlh-user'
 
 on:
   workflow_dispatch:
