@@ -25,4 +25,14 @@
 #### "There is a GitHub Actions workflow file already setup for almost all of the operational functionalities and features of the IDP"
 
 ## [infrastructure-plan](./infrastructure-plan)
-### 
+
+### 1. Create AWS VPC
+A VPC with two Public Subnets, two Private Subnets, an Internet Gateway and a Route Table.
+- **Actions workflow:** `VPC Apply Terraform` || `VPC Destroy Terraform`
+
+### 2. Create AWS EKS Cluster
+An EKS Cluster with IAM Role and Policy attachment, Worker Nodes, Node Group and Amazon EBS CSI Driver Add-on.
+- **Actions workflow:** `EKS Apply Terraform` || `EKS Destroy Terraform`
+
+### 3. Setup ArgoCD
+- **Actions workflow:** `ArgoCD Install on EKS` || `ArgoCD Uninstall from EKS`
